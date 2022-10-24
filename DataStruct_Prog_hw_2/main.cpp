@@ -82,7 +82,7 @@ void printLinkedList(polyNode *startNode) {
 void printCoeff(polyNode *startNode, int searchPow) {
     while(startNode) {
         if(startNode->expon == searchPow) {
-            cout << "exponoent: " << startNode->expon << " coefficient: " << startNode->coeff << '\n';
+            cout << "exponent: " << startNode->expon << " coefficient: " << startNode->coeff << '\n';
             return;
         }
         startNode = startNode->link;
@@ -172,19 +172,12 @@ void sortedInsertNode(polyNode **startNode, double newCoeff, int newExpon) {
         return;
     }
     
-    /*for(; (*currNode != NULL) && !(newExpon > (*currNode)->expon); *currNode = (*currNode)->link) {
-        cout << "hi\n";
-        lastNode = currNode;
-    }*/
-    
     while(currNode && (newExpon < currNode->expon)) {
-        //cout << "expon: " << currNode->expon << '\n';
         lastNode = currNode;
         currNode = currNode->link;
         
         //if new node has same expon then add it in
         if(currNode && newExpon == currNode->expon) {
-            //cout << "add expon\n";
             addCoeff(currNode, newCoeff, newExpon);
             return;
         }
@@ -192,27 +185,19 @@ void sortedInsertNode(polyNode **startNode, double newCoeff, int newExpon) {
     
     //if end of list
     if(currNode == NULL) {
-        //cout << "last node: " << lastNode->expon << '\n';
         //pull back currNode
         currNode = lastNode;
-        //cout << "currNode: " << currNode->expon << '\n';
         if(newExpon > currNode->expon) {
             //cout << "left\n";
             insertLeftLink(&currNode, newCoeff, newExpon);
         } else {
             //else insert right
-            //cout << "right\n";
             insertRightLink(&currNode, newCoeff, newExpon);
-            //insertRear(currNode, newCoeff, newExpon);
         }
     } else {
         //else insert right link
-        //cout << "insert normally\n";
         insertRightLink(&currNode, newCoeff, newExpon);
     }
-    
-    //cout << "print from function\n";
-    //printLinkedList(*startNode);
 }
 
 //modify specific term's coefficient
